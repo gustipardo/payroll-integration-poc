@@ -1,0 +1,76 @@
+openapi: 3.0.1
+info:
+title: Payroll Integration PoC
+version: 1.0.0
+paths:
+/employees:
+post:
+summary: Ingesta de empleados (bulk)
+requestBody:
+3
+required: true
+content:
+application/json:
+schema:
+type: object
+properties:
+employees:
+type: array
+items:
+type: object
+properties:
+external_id: { type: string }
+name: { type: string }
+role: { type: string }
+responses:
+'200':
+description: OK
+/hours:
+post:
+summary: Registrar horas
+requestBody:
+required: true
+content:
+application/json:
+schema:
+type: object
+properties:
+employee_external_id: { type: string }
+date: { type: string, format: date }
+hours: { type: number }
+responses:
+'200':
+description: OK
+/overtime/calc:
+post:
+summary: Calcular overtime y crear request
+requestBody:
+required: true
+content:
+application/json:
+schema:
+type: object
+properties:
+period_start: { type: string, format: date }
+period_end: { type: string, format: date }
+responses:
+'200':
+description: OK
+/approvals/{id}/approve:
+post:
+parameters:
+4
+- name: id
+in: path
+required: true
+schema:
+type: string
+responses:
+'200':
+description: OK
+/export/payroll:
+get:
+summary: Export CSV para nómina (solo approved)
+responses:
+'200':
+description: text/csv
