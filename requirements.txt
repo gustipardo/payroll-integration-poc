@@ -1,0 +1,8 @@
+azure-functions
+SQLAlchemy>=1.4
+psycopg2-binary
+PyJWT
+alembic
+pytest
+requests
+python-dotenv
